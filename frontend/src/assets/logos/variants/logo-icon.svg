@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+  <!-- Icon only: W super dinamica -->
+  <g>
+    <!-- Paper/Document background -->
+    <rect x="3" y="3" width="36" height="36" rx="3" fill="#e2e8f0" opacity="0.4"/>
+    <rect x="2" y="2" width="36" height="36" rx="3" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    
+    <!-- W super dinamica -->
+    <g transform="translate(4, 9)">
+      <!-- Prima discesa -->
+      <path d="
+        M 0 0
+        C 0.5 2, 1 5, 2 8
+        C 2.5 10, 3 12, 4 15
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="4" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"/>
+      
+      <!-- V centrale -->
+      <path d="
+        M 4 15
+        C 6 11, 9 6, 12 3
+        C 13 2, 14 1, 15 0.5
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="4" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"/>
+      
+      <!-- Seconda discesa -->
+      <path d="
+        M 15 0.5
+        C 16 3, 17 6, 18 10
+        C 18.5 12, 19 14, 20 17
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="4" 
+      stroke-linecap="round" 
+      stroke-linejoin="round"/>
+      
+      <!-- BAFFO lungo -->
+      <path d="
+        M 20 17
+        C 22 14, 24 11, 26 9
+        C 27 8, 28 7, 30 6
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="3.5" 
+      stroke-linecap="round"
+      opacity="0.95"/>
+      
+      <!-- Scia penna -->
+      <path d="
+        M 30 6
+        C 32 5, 34 4.5, 36 4
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="2.5" 
+      stroke-linecap="round"
+      opacity="0.7"/>
+      
+      <!-- Scia finale -->
+      <path d="
+        M 36 4
+        C 37.5 3.5, 39 3.2, 40 3
+      " 
+      fill="none" 
+      stroke="#6366f1" 
+      stroke-width="1.5" 
+      stroke-linecap="round"
+      opacity="0.4"/>
+    </g>
+    
+    <circle cx="4" cy="9" r="1.5" fill="#6366f1" opacity="0.8"/>
+  </g>
+</svg>
