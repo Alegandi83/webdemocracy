@@ -1,0 +1,14 @@
+# Environment files
+.env
+.env.lakebase
+
+# Python
+__pycache__/
+venv/
+*.pyc
+
+# Node
+node_modules/
+
+# Database
+*.db

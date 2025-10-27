@@ -22,7 +22,8 @@ Web Democracy è un'applicazione completa che permette di creare, gestire e part
 - **QRCode.react** - Generazione QR code
 
 ### Infrastruttura
-- **Docker Compose** - PostgreSQL containerizzato
+- **Docker Compose** - PostgreSQL containerizzato (modalità locale)
+- **Databricks Lakebase** - Database cloud gestito (modalità alternativa)
 - **Uvicorn** - Server ASGI ad alte prestazioni
 
 ---
@@ -145,15 +146,25 @@ web-democracy/
 ## 🛠️ Installazione e Avvio
 
 ### Prerequisiti
+
+#### Modalità Standard (PostgreSQL locale)
 - **Python 3.10+**
 - **Node.js 16+**
 - **Docker & Docker Compose**
 - **PostgreSQL** (via Docker)
 
+#### Modalità Lakebase (Databricks)
+- **Python 3.10+**
+- **Node.js 16+**
+- **Account Databricks** con SQL Warehouse
+- **Personal Access Token** Databricks
+
 ### 🚀 Avvio Rapido
 
+#### Opzione 1: PostgreSQL Locale (Default)
+
 ```bash
-# 1. Avvia tutti i servizi (database, backend, frontend)
+# Avvia tutti i servizi (database, backend, frontend)
 ./start-dev.sh
 
 # L'applicazione sarà disponibile su:
@@ -161,9 +172,31 @@ web-democracy/
 # - Backend API: http://localhost:8000
 # - API Docs: http://localhost:8000/docs
 
-# 2. (Opzionale) Testa il deploy completo
+# (Opzionale) Testa il deploy completo
 ./test-deploy.sh
 ```
+
+#### Opzione 2: Databricks Lakebase
+
+```bash
+# 1. Configura credenziali Databricks
+cp env.lakebase.example .env.lakebase
+nano .env.lakebase  # Inserisci le tue credenziali
+
+# 2. Inizializza database su Lakebase (una sola volta)
+# Esegui database/init-lakebase.sql nel Databricks SQL Editor
+
+# 3. Avvia applicazione con Lakebase
+./start-dev-lakebase.sh
+
+# L'applicazione sarà disponibile su:
+# - Frontend: http://localhost:3000
+# - Backend API: http://localhost:8000
+# - API Docs: http://localhost:8000/docs
+# - Database: Databricks Lakebase (cloud)
+```
+
+📖 **Guida completa Lakebase**: Vedi [LAKEBASE_SETUP.md](LAKEBASE_SETUP.md)
 
 ### 📋 Avvio Manuale (Passo per Passo)
 
