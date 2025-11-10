@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { Survey, SurveyCreate, VoteCreate, SurveyResultsResponse, SurveyStats, Tag, TagCreate, SurveyLike, SurveyLikeCreate, SurveyLikeStats } from '../types';
 
-// URL assoluto del backend (proxy configurato per endpoint specifici)
+// For local/hybrid development: use localhost:8000
+// For Databricks deployment: the build process will handle this
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost:8000' : 'http://localhost:8000',
+  baseURL: process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:8000' 
+    : '',  // In production, same origin
 });
 
 export const surveyApi = {

@@ -2,33 +2,36 @@
 
 **Piattaforma web moderna per la democrazia partecipativa e la gestione di sondaggi con decisioni collettive.**
 
-Web Democracy è un'applicazione completa che permette di creare, gestire e partecipare a sondaggi con un'interfaccia elegante e funzionalità avanzate per facilitare il processo decisionale democratico.
+Web Democracy è un'applicazione completa che permette di creare, gestire e partecipare a sondaggi con un'interfaccia elegante e funzionalità avanzate per facilitare il processo decisionale democratico. 
+
+Questa versione supporta **tre modalità di deployment**:
+- **Locale**: PostgreSQL in Docker + applicazione locale
+- **Ibrida**: Database su Databricks Lakebase + applicazione locale
+- **Full Databricks**: Database su Lakebase + App su Databricks Apps
 
 ---
 
-## 🚀 Tecnologie
+## 🌟 Caratteristiche Principali
 
-### Backend
-- **FastAPI** (Python) - Framework web moderno e performante
-- **PostgreSQL** - Database relazionale robusto
-- **SQLAlchemy** - ORM per gestione database
-- **Pydantic** - Validazione dati e serializzazione
+### Modalità di Deployment
 
-### Frontend
-- **React 18** - Libreria UI moderna
-- **TypeScript** - Tipizzazione statica
-- **React Router** - Gestione routing
-- **Lucide React** - Icone eleganti
-- **QRCode.react** - Generazione QR code
+Web Democracy supporta **tre modalità di deployment** flessibili:
 
-### Infrastruttura
-- **Docker Compose** - PostgreSQL containerizzato (modalità locale)
-- **Databricks Lakebase** - Database cloud gestito (modalità alternativa)
-- **Uvicorn** - Server ASGI ad alte prestazioni
+1. **💻 Locale**: PostgreSQL in Docker + applicazione locale (sviluppo)
+2. **🔀 Ibrida**: Database su Databricks Lakebase + applicazione locale (testing)
+3. **🚀 Full Databricks**: Database su Lakebase + App su Databricks Apps (produzione)
+
+### Stack Tecnologico
+
+- **Frontend**: React 18 + TypeScript
+- **Backend**: FastAPI (Python)
+- **Database**: Databricks Lakebase (PostgreSQL-compatibile)
+- **Deployment**: Databricks Asset Bundles (DAB)
+- **Authentication**: Databricks OAuth
 
 ---
 
-## ✨ Funzionalità Principali
+## ✨ Funzionalità
 
 ### 📊 Tipologie di Sondaggi
 
@@ -37,131 +40,37 @@ Web Democracy è un'applicazione completa che permette di creare, gestire e part
 | **Scelta Singola** | Una sola risposta (radio button) | ☑️ |
 | **Scelta Multipla** | Più risposte possibili (checkbox) | ☑️☑️ |
 | **Rating** | Valutazione con stelle ⭐, cuori ❤️ o numeri | ⭐⭐⭐⭐⭐ |
-| **Scala Numerica** | Valutazione da min a max con etichette personalizzabili | 1️⃣➡️🔟 |
+| **Scala Numerica** | Valutazione da min a max con etichette | 1️⃣➡️🔟 |
 | **Risposta Aperta** | Testo libero | 📝 |
 | **Data** | Selezione date disponibili | 📅 |
 
 ### 🎯 Caratteristiche Avanzate
 
-#### Opzioni Personalizzate
-- Gli utenti possono **aggiungere nuove opzioni** durante la votazione
-- Supporto per opzioni personalizzate in **tutti i tipi** di sondaggio
-- Per rating/scale: l'utente vota contestualmente la nuova opzione proposta
-- Per date: possibilità di proporre date alternative
-
-#### Sistema di Tag
-- **Categorizzazione** con tag colorati
-- **8 tag predefiniti**: Tecnologia, Lavoro, Sport, Cultura, Cibo, Viaggi, Salute, Educazione
-- **Filtri dinamici** per ricerca sondaggi
-
-#### Gestione Voti
-- **Prevenzione voti multipli** (via IP + session ID)
-- **Voti multipli opzionali** (configurabile per sondaggio)
-- **Tracking partecipanti** unici
-- **Risultati in tempo reale** con statistiche
-
-#### Rating e Feedback
-- **Sistema di like** sui sondaggi (1-5 pallini verdi)
-- **Commenti opzionali** per feedback qualitativo
-- **Visualizzazione rating medio** per sondaggio
-
-#### Statistiche Avanzate
-- **Media, mediana, min/max** per valori numerici
-- **Distribuzione valori** con grafici a barre
-- **Percentuali di voto** per ogni opzione
-- **Grafici visivi** per risultati immediati
-
-#### Scadenza
-- **Data e ora** di chiusura configurabili
-- **Countdown** automatico
-- **Filtri** per sondaggi attivi/scaduti
+- ✅ **Opzioni Personalizzate**: Gli utenti possono aggiungere nuove opzioni durante la votazione
+- ✅ **Sistema di Tag**: 8 tag predefiniti con colori personalizzati
+- ✅ **Prevenzione Voti Multipli**: Tracking via IP + session ID
+- ✅ **Rating Sondaggi**: Sistema di like con 1-5 pallini verdi
+- ✅ **Commenti**: Feedback qualitativo sui sondaggi
+- ✅ **Statistiche Avanzate**: Media, mediana, distribuzione valori
+- ✅ **Scadenza**: Data e ora di chiusura con countdown
+- ✅ **Grafici Visivi**: Risultati in tempo reale
 
 ---
 
-## 🎨 Design e UX
+## 🚀 Quick Start
 
-### Logo
-Logo moderno e dinamico che rappresenta una **"W" tracciata come una pennellata**, simulando il gesto di firmare una spunta su un foglio di voto.
+Scegli la modalità di deployment più adatta alle tue esigenze:
 
-**Caratteristiche:**
-- Stile minimal e professionale
-- Effetto "baffo di penna" dinamico
-- Colore primario: Indigo `#6366f1`
-- 4 varianti: logo completo, small (navbar), icon, favicon
+### Opzione 1: 💻 Modalità Locale (Sviluppo)
 
-### Interfaccia Utente
-- **Design moderno** con palette colori elegante
-- **Layout responsive** per desktop e mobile
-- **Card con ombre** leggere e border sottili
-- **Animazioni fluide** per feedback visivo
-- **Sidebar laterale** per filtri e navigazione
+**Ideale per**: Sviluppo locale, test rapidi, nessuna dipendenza cloud
 
-### Home Page
-Layout a **due colonne** elegante:
-- **Colonna sinistra**: Loghi Web Democracy, Databricks, TeamSystem con separatori
-- **Colonna destra**: QR Code grande per accesso rapido
+**Prerequisiti**:
+- Python 3.10+
+- Node.js 16+
+- Docker & Docker Compose
 
----
-
-## 📁 Struttura Progetto
-
-```
-web-democracy/
-├── backend/
-│   ├── main.py              # API endpoints FastAPI
-│   ├── models.py            # Modelli SQLAlchemy
-│   ├── schemas.py           # Schemi Pydantic
-│   ├── database.py          # Configurazione database
-│   ├── requirements.txt     # Dipendenze Python
-│   └── venv/               # Ambiente virtuale Python
-│
-├── frontend/
-│   ├── src/
-│   │   ├── pages/          # Componenti pagina
-│   │   │   ├── Home.tsx
-│   │   │   ├── SurveyList.tsx
-│   │   │   ├── CreateSurvey.tsx
-│   │   │   ├── SurveyDetail.tsx
-│   │   │   ├── SurveyResults.tsx
-│   │   │   └── Settings.tsx
-│   │   ├── components/     # Componenti riutilizzabili
-│   │   ├── services/       # API client
-│   │   ├── types/          # TypeScript types
-│   │   └── assets/         # Loghi e risorse
-│   ├── public/
-│   │   ├── assets/logos/   # Loghi pubblici
-│   │   └── favicon.svg     # Favicon
-│   └── package.json
-│
-├── database/
-│   └── init.sql            # Script inizializzazione database
-│
-├── docker-compose.yml       # Configurazione PostgreSQL
-├── start-dev.sh            # Script avvio sviluppo
-└── stop-dev.sh             # Script stop servizi
-```
-
----
-
-## 🛠️ Installazione e Avvio
-
-### Prerequisiti
-
-#### Modalità Standard (PostgreSQL locale)
-- **Python 3.10+**
-- **Node.js 16+**
-- **Docker & Docker Compose**
-- **PostgreSQL** (via Docker)
-
-#### Modalità Lakebase (Databricks)
-- **Python 3.10+**
-- **Node.js 16+**
-- **Account Databricks** con SQL Warehouse
-- **Personal Access Token** Databricks
-
-### 🚀 Avvio Rapido
-
-#### Opzione 1: PostgreSQL Locale (Default)
+**Avvio**:
 
 ```bash
 # Avvia tutti i servizi (database, backend, frontend)
@@ -171,12 +80,20 @@ web-democracy/
 # - Frontend: http://localhost:3000
 # - Backend API: http://localhost:8000
 # - API Docs: http://localhost:8000/docs
-
-# (Opzionale) Testa il deploy completo
-./test-deploy.sh
+# - Database: PostgreSQL locale (Docker)
 ```
 
-#### Opzione 2: Databricks Lakebase
+### Opzione 2: 🔀 Modalità Ibrida (Testing)
+
+**Ideale per**: Testing con database cloud, sviluppo con Lakebase
+
+**Prerequisiti**:
+- Python 3.10+
+- Node.js 16+
+- Account Databricks con Lakebase abilitato
+- Personal Access Token Databricks
+
+**Avvio**:
 
 ```bash
 # 1. Configura credenziali Databricks
@@ -184,7 +101,8 @@ cp env.lakebase.example .env.lakebase
 nano .env.lakebase  # Inserisci le tue credenziali
 
 # 2. Inizializza database su Lakebase (una sola volta)
-# Esegui database/init-lakebase.sql nel Databricks SQL Editor
+# Esegui database/init.sql nel Databricks SQL Editor
+# oppure lo script lo farà automaticamente se hai psql installato
 
 # 3. Avvia applicazione con Lakebase
 ./start-dev-lakebase.sh
@@ -196,71 +114,113 @@ nano .env.lakebase  # Inserisci le tue credenziali
 # - Database: Databricks Lakebase (cloud)
 ```
 
-📖 **Guida completa Lakebase**: Vedi [LAKEBASE_SETUP.md](LAKEBASE_SETUP.md)
+### Opzione 3: 🚀 Full Databricks (Produzione)
 
-### 📋 Avvio Manuale (Passo per Passo)
+**Ideale per**: Deploy in produzione, scalabilità, zero maintenance
 
-#### 1. Database PostgreSQL
+**Prerequisiti**:
+- Databricks CLI v0.267.0+
+- Node.js 18+
+- Account Databricks con Apps e Lakebase abilitati
+
+**Deployment**:
 
 ```bash
-# Avvia PostgreSQL con Docker
-docker-compose up -d
+# 1. Build del frontend
+./build.sh
 
-# Verifica che sia in esecuzione
-docker-compose ps
+# 2. Valida la configurazione
+databricks bundle validate -t dev
 
-# (Opzionale) Inizializza database da zero
-docker exec -i survey-app-postgres-1 psql -U survey_user -d survey_db < database/init.sql
+# 3. Deploy su Databricks
+databricks bundle deploy -t dev
+
+# 4. Avvia l'applicazione
+databricks apps start webdemocracy-app
 ```
 
-#### 2. Backend FastAPI
+🎉 **Fatto!** L'app è disponibile su `https://webdemocracy-app-<workspace-id>.cloud.databricks.com`
+
+### 🛑 Stop Servizi (Locale e Ibrida)
 
 ```bash
-cd backend
-
-# Crea ambiente virtuale
-python3 -m venv venv
-source venv/bin/activate  # Linux/Mac
-# oppure
-venv\Scripts\activate     # Windows
-
-# Installa dipendenze
-pip install -r requirements.txt
-
-# Avvia server (sviluppo)
-python main.py
-
-# Il backend sarà su http://localhost:8000
-```
-
-#### 3. Frontend React
-
-```bash
-cd frontend
-
-# Installa dipendenze
-npm install
-
-# Avvia server di sviluppo
-npm start
-
-# Il frontend sarà su http://localhost:3000
-```
-
-### 🛑 Stop Servizi
-
-```bash
-# Stop tutti i servizi
+# Arresta tutti i servizi
 ./stop-dev.sh
 ```
 
 ---
 
-## 🗄️ Database
+## 📁 Struttura Progetto
 
-### Schema Principale
+```
+webdem/
+├── backend/
+│   ├── app.py                  # FastAPI application (per Databricks Apps)
+│   ├── main_local.py           # FastAPI application (per locale/ibrida)
+│   ├── lakebase_connector.py   # Databricks Lakebase OAuth connection (solo Databricks)
+│   ├── database.py             # Database config unificato (locale + ibrida)
+│   ├── models.py               # SQLAlchemy models (unificato per tutte le modalità)
+│   ├── schemas.py              # Pydantic validation schemas
+│   ├── requirements.txt        # Python dependencies (locale + ibrida)
+│   ├── requirements-databricks.txt # Python dependencies (Full Databricks con OAuth)
+│   ├── app.yml                 # App command configuration (Databricks)
+│   └── static/                 # Built React frontend (per Databricks)
+│
+├── frontend/
+│   ├── src/                    # React source code
+│   │   ├── pages/              # Home, SurveyList, CreateSurvey, etc.
+│   │   ├── components/         # Reusable UI components
+│   │   ├── services/           # API client
+│   │   └── types/              # TypeScript types
+│   ├── public/                 # Public assets and logos
+│   └── package.json            # npm dependencies
+│
+├── database/
+│   ├── init.sql                # Init script (PostgreSQL & Lakebase)
+│   ├── reset-database.sql      # Reset database
+│   └── README.md               # Documentazione database
+│
+├── resources/                  # Configurazioni Databricks Apps
+│   ├── database.yml            # Lakebase database configuration
+│   └── app.yml                 # Databricks App configuration
+│
+├── docker-compose.yml          # PostgreSQL locale
+├── databricks.yml              # Main DAB configuration (Full Databricks)
+├── env.lakebase.example        # Template configurazione Lakebase
+├── start-dev.sh                # Avvio modalità locale
+├── start-dev-lakebase.sh       # Avvio modalità ibrida
+├── stop-dev.sh                 # Stop servizi locali/ibridi
+├── build.sh                    # Frontend build script (Databricks)
+├── DEPLOYMENT_GUIDE.md         # Guida deployment dettagliata
+├── PROJECT_SUMMARY.md          # Riepilogo progetto
+├── QUICKSTART.md               # Guida rapida
+└── README.md                   # Questo file
+```
 
-**8 Tabelle:**
+## 🌍 Confronto Modalità di Deployment
+
+| Caratteristica | 💻 Locale | 🔀 Ibrida | 🚀 Full Databricks |
+|----------------|-----------|-----------|-------------------|
+| **Database** | Docker PostgreSQL | Lakebase | Lakebase |
+| **Backend** | Locale (FastAPI) | Locale (FastAPI) | Databricks Apps |
+| **Frontend** | Locale (React) | Locale (React) | Databricks Apps |
+| **Authentication** | None | Token | OAuth |
+| **Setup Time** | ⚡ 2 minuti | ⏱️ 5 minuti | 🕐 10 minuti |
+| **Scalability** | ⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Maintenance** | Alta | Media | Bassa |
+| **Costo** | Gratuito | Cloud DB | Cloud Full |
+| **Ideale per** | Development | Testing | Production |
+| **Dipendenze** | Docker | Databricks | Databricks |
+| **Connessione Internet** | No (opzionale) | Sì | Sì |
+| **Hot Reload** | ✅ | ✅ | ❌ |
+
+---
+
+## 🗄️ Database Schema
+
+Il database utilizza uno **schema dedicato `webdemocracy`** su Lakebase con:
+
+### Tabelle Principali
 
 1. **surveys** - Sondaggi con configurazioni
 2. **survey_options** - Opzioni di risposta
@@ -271,324 +231,279 @@ npm start
 7. **survey_tags** - Relazione many-to-many
 8. **settings** - Impostazioni applicazione
 
-### Enum Types
+### Inizializzazione Automatica
 
-- **questiontype**: `single_choice`, `multiple_choice`, `open_text`, `scale`, `rating`, `date`
+Al primo avvio, l'app automaticamente:
+- ✅ Crea lo schema `webdemocracy`
+- ✅ Crea tutte le tabelle con indici
+- ✅ Inserisce 8 tag predefiniti
+- ✅ Configura il QR code di default
+- ✅ Garantisce permessi a tutti gli utenti
 
-### Campi Chiave
+---
 
-- `question_type` - Tipo di domanda
-- `min_value` / `max_value` - Range per scale/rating
-- `rating_icon` - Icona rating: "star", "heart", "number"
-- `allow_custom_options` - Permetti opzioni personalizzate
-- `allow_multiple_responses` - Permetti voti multipli
-- `expires_at` - Data/ora scadenza (UTC)
-- `numeric_value` - Valore numerico per rating/scale
-- `date_value` - Valore data per sondaggi date
-- `option_id` - Collegamento opzione (per risposte multiple)
+## 🔧 Architettura
 
-### Inizializzazione
+### Backend (FastAPI)
 
-```bash
-# Reset completo database (ATTENZIONE: cancella tutti i dati!)
-docker exec -i survey-app-postgres-1 psql -U survey_user -d survey_db < database/init.sql
+- **OAuth Authentication**: Usa il token Databricks per connettersi a Lakebase
+- **Static File Serving**: Serve il frontend React dalla cartella `static/`
+- **SPA Routing**: Gestisce il routing di React Router
+- **API Endpoints**: Prefissati con `/api/` per evitare conflitti
 
-# Include:
-# - 6 sondaggi di esempio (uno per tipo)
-# - 8 tag predefiniti
-# - Setting QR code
-# - Indici per performance ottimali
-```
+### Frontend (React)
+
+- **React 18**: Con hooks e functional components
+- **TypeScript**: Tipizzazione statica completa
+- **React Router**: Client-side routing
+- **Axios**: Client HTTP per chiamate API
+- **Lucide Icons**: Icone moderne e responsive
+
+### Database (Lakebase)
+
+- **PostgreSQL-compatible**: Usa psycopg per la connessione
+- **OAuth Token Authentication**: Password fornita dinamicamente
+- **Schema Isolation**: Tutto in `webdemocracy` schema
+- **Auto-initialization**: Schema creato al primo avvio
 
 ---
 
 ## 📊 API Endpoints
 
+### Health & Metrics
+
+```
+GET    /api/health              Health check
+GET    /metrics                 Metrics for monitoring
+```
+
 ### Sondaggi
 
 ```
-GET    /surveys              Lista tutti i sondaggi (con filtri)
-POST   /surveys              Crea nuovo sondaggio
-GET    /surveys/{id}         Dettagli sondaggio
-DELETE /surveys/{id}         Elimina sondaggio
-GET    /surveys/{id}/results Risultati con statistiche
-POST   /surveys/{id}/vote    Vota in un sondaggio
+GET    /surveys                 Lista sondaggi (con filtri)
+POST   /surveys                 Crea sondaggio
+GET    /surveys/{id}            Dettagli sondaggio
+PATCH  /surveys/{id}            Aggiorna sondaggio
+DELETE /surveys/{id}            Elimina sondaggio
+GET    /surveys/{id}/results    Risultati con statistiche
+POST   /surveys/{id}/vote       Vota
+GET    /surveys/{id}/stats      Statistiche dettagliate
 ```
-
-#### Filtri Query Disponibili
-- `?question_type=rating` - Filtra per tipo
-- `?tag=Tecnologia` - Filtra per tag
-- `?is_active=true` - Solo sondaggi attivi
 
 ### Tag
 
 ```
-GET    /tags                 Lista tag
-POST   /tags                 Crea tag
-DELETE /tags/{id}            Elimina tag
+GET    /tags                    Lista tag
+POST   /tags                    Crea tag
+DELETE /tags/{id}               Elimina tag
 ```
 
-### Like/Rating Sondaggi
+### Like/Rating
 
 ```
-POST   /surveys/{id}/like    Aggiungi rating al sondaggio
-GET    /surveys/{id}/likes   Ottieni like statistiche
+POST   /surveys/{id}/like       Aggiungi rating
+GET    /surveys/{id}/like       Ottieni rating utente
+GET    /surveys/{id}/like/stats Statistiche rating
 ```
 
 ### Settings
 
 ```
-GET    /settings/{key}       Ottieni impostazione
-PUT    /settings/{key}       Aggiorna impostazione
-```
-
-### Documentazione Interattiva
-
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-
----
-
-## 🎯 Utilizzo
-
-### Creare un Sondaggio
-
-1. Vai su **"Crea Nuovo Sondaggio"**
-2. Inserisci **titolo** e **descrizione** (opzionale)
-3. Seleziona **tipologia** (pulsanti in riga)
-4. Per **date**: usa selettori data invece di testo
-5. Configura **opzioni specifiche**:
-   - Rating: scegli icona (stelle/cuori/numeri) e range
-   - Scala: imposta range e etichette min/max
-   - Date: aggiungi date disponibili
-6. Aggiungi **tag** (opzionale)
-7. Imposta **scadenza** (opzionale)
-8. Abilita **opzioni avanzate**:
-   - Permetti opzioni personalizzate
-   - Permetti voti multipli
-   - Richiedi commento
-9. Clicca **"Crea Sondaggio"**
-
-### Partecipare a un Sondaggio
-
-1. Seleziona un **sondaggio** dalla lista
-2. **Rispondi** secondo il tipo:
-   - Scelta singola: seleziona una opzione
-   - Scelta multipla: seleziona più opzioni
-   - Rating: valuta con stelle/cuori/numeri
-   - Scala: usa slider per ogni opzione
-   - Risposta aperta: scrivi testo libero
-   - Data: seleziona data disponibile
-3. (Opzionale) **Proponi opzione personalizzata**:
-   - Per rating/scale: valuta contestualmente
-   - Per date: proponi data alternativa
-   - Per testo aperto: aggiungi nuovo campo
-4. Aggiungi **commento** (se abilitato)
-5. Clicca **"Conferma Voto"**
-
-### Visualizzare Risultati
-
-- **Grafici a barre** con percentuali
-- **Statistiche numeriche** (media, mediana, min/max)
-- **Opzione più votata** evidenziata
-- **Distribuzione valori** per rating/scale
-- **Tutte le risposte aperte** in lista
-- **Date con voti** per sondaggi date
-- **Commenti utenti** visibili
-- **Opzioni personalizzate** incluse nei risultati
-
-### Filtrare Sondaggi
-
-Usa la **sidebar laterale** per filtrare:
-- Per **tipologia** sondaggio
-- Per **tag**
-- Per **stato** (attivi/scaduti)
-
----
-
-## 🔧 Configurazione
-
-### Variabili Ambiente Backend
-
-```bash
-# File: backend/.env (opzionale)
-DATABASE_URL=postgresql://survey_user:survey_password@localhost:5432/survey_db
-```
-
-### Configurazione Database
-
-Default: `postgresql://survey_user:survey_password@localhost:5432/survey_db`
-
-Per usare un database diverso:
-```bash
-export DATABASE_URL="postgresql://user:pass@host:port/dbname"
-python main.py
-```
-
-### Configurazione QR Code
-
-Il QR Code nella home page può essere configurato via Settings:
-
-```bash
-# Via API
-curl -X PUT http://localhost:8000/settings/qr_code_url \
-  -H "Content-Type: application/json" \
-  -d '{"value": "https://tuo-dominio.com"}'
-```
-
-O direttamente nel database:
-```sql
-UPDATE settings SET value = 'https://tuo-dominio.com' WHERE key = 'qr_code_url';
+GET    /settings/{key}          Ottieni setting
+PUT    /settings/{key}          Aggiorna setting
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## 🎨 Design & UX
 
-### Test rapido deploy
+### Logo
 
-```bash
-# Verifica che tutti i servizi siano attivi
-./test-deploy.sh
-```
+Logo moderno che rappresenta una **"W" tracciata come una pennellata**, simulando il gesto di firmare una spunta su un foglio di voto.
 
-### Backend non si avvia
+- Stile minimal e professionale
+- Colore primario: Indigo `#6366f1`
+- 4 varianti: completo, small, icon, favicon
 
-```bash
-# Verifica PostgreSQL
-docker-compose ps
+### Interfaccia Utente
 
-# Verifica credenziali
-psql -U survey_user -d survey_db -h localhost
-
-# Reinstalla dipendenze
-pip install --force-reinstall -r requirements.txt
-```
-
-### Porta 5432 già in uso
-
-```bash
-# Verifica container PostgreSQL attivi
-docker ps | grep postgres
-
-# Ferma eventuali container conflittuali
-docker stop <container-name>
-docker rm <container-name>
-```
-
-### Frontend non si connette
-
-```bash
-# Verifica backend su porta 8000
-curl http://localhost:8000/
-
-# Pulisci cache npm
-npm cache clean --force
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Errori Database
-
-```bash
-# Reset database completo
-docker-compose down -v
-docker-compose up -d
-sleep 5
-docker exec -i survey-app-postgres-1 psql -U survey_user -d survey_db < database/init.sql
-```
-
-### Porta già in uso
-
-```bash
-# Backend (porta 8000)
-lsof -ti:8000 | xargs kill -9
-
-# Frontend (porta 3000)
-lsof -ti:3000 | xargs kill -9
-```
-
----
-
-## 📱 Screenshot e Demo
+- Design moderno con palette elegante
+- Layout responsive per desktop e mobile
+- Card con ombre leggere
+- Animazioni fluide
+- Sidebar laterale per filtri
 
 ### Home Page
-Layout elegante a due colonne con loghi partner e QR Code
 
-### Lista Sondaggi
-Card moderne con tag colorati, filtri sidebar, statistiche rapide
+Layout a due colonne:
+- **Sinistra**: Loghi Web Democracy, Databricks, TeamSystem
+- **Destra**: QR Code grande per accesso rapido
 
-### Creazione Sondaggio
-Form intuitivo con selettori tipo a pulsanti, configurazioni avanzate
+---
 
-### Votazione
-Interfaccia dinamica adattata al tipo di sondaggio
+## 📖 Documentazione
 
-### Risultati
-Grafici interattivi, statistiche complete, commenti utenti
+### Guide Complete
+
+- **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** - Guida dettagliata al deployment
+  - Prerequisiti e setup
+  - Deployment passo-passo
+  - Troubleshooting
+  - Monitoring e logs
+  - Production deployment
+
+### Reference
+
+- [Databricks Apps Documentation](https://docs.databricks.com/en/apps/)
+- [Databricks Lakebase Documentation](https://docs.databricks.com/en/lakebase/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+
+---
+
+## 🔄 Workflow di Sviluppo
+
+### Sviluppo Locale
+
+Per testare le modifiche localmente (usando Lakebase remoto):
+
+```bash
+# Backend
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+
+# Frontend
+cd frontend
+npm install
+npm start
+```
+
+### Deploy su Databricks
+
+Dopo le modifiche:
+
+```bash
+# Se hai modificato il frontend
+./build.sh
+
+# Deploy
+databricks bundle deploy -t dev
+
+# Restart app
+databricks apps restart webdemocracy-app
+```
+
+---
+
+## 🌍 Differenze tra le Versioni
+
+| Caratteristica | Locale | Ibrida | Full Databricks |
+|----------------|--------|--------|-----------------|
+| Database | Docker PostgreSQL | Lakebase | Lakebase |
+| Backend | Locale (FastAPI) | Locale (FastAPI) | Databricks Apps |
+| Frontend | Locale (React) | Locale (React) | Databricks Apps |
+| Authentication | None | Token | OAuth |
+| Scalability | ⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Maintenance | Alta | Media | Bassa |
+| Ideal For | Development | Testing | Production |
+
+---
+
+## 🎯 Use Cases
+
+### Aziende
+
+- ✅ Sondaggi di soddisfazione dipendenti
+- ✅ Decisioni su benefit aziendali
+- ✅ Feedback su iniziative interne
+- ✅ Pianificazione eventi aziendali
+
+### Comunità
+
+- ✅ Votazioni su progetti comunitari
+- ✅ Selezione date per incontri
+- ✅ Raccolta opinioni su temi sociali
+- ✅ Prioritizzazione iniziative
+
+### Educazione
+
+- ✅ Feedback su corsi
+- ✅ Valutazione materiale didattico
+- ✅ Organizzazione attività
+- ✅ Sondaggi studenti
+
+---
+
+## 🛠️ Tecnologie e Librerie
+
+### Backend
+
+- **FastAPI** 0.115.4 - Web framework
+- **SQLAlchemy** 2.0.41 - ORM
+- **Pydantic** 2.12.3 - Data validation
+- **psycopg** - PostgreSQL driver
+- **databricks-sdk** - Databricks integration
+- **uvicorn** - ASGI server
+
+### Frontend
+
+- **React** 18.2.0 - UI library
+- **TypeScript** 4.9.5 - Type safety
+- **React Router** 6.20.1 - Routing
+- **Axios** 1.6.2 - HTTP client
+- **Lucide React** 0.294.0 - Icons
+- **QRCode.react** 3.1.0 - QR code generation
 
 ---
 
 ## 🔐 Sicurezza
 
-- **Prevenzione SQL Injection** via SQLAlchemy ORM
-- **Validazione input** con Pydantic
-- **Session tracking** per controllo voti
-- **IP tracking** per anti-fraud
-- **CORS** configurato per sicurezza
-- **Prepared statements** per tutte le query
-
----
-
-## 🚀 Deployment (Produzione)
-
-### Backend
-
-```bash
-# Usa Gunicorn con Uvicorn workers
-pip install gunicorn
-gunicorn main:app -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
-```
-
-### Frontend
-
-```bash
-# Build per produzione
-npm run build
-
-# Servi con Nginx o server statico
-# La cartella build/ contiene i file statici
-```
-
-### Database
-
-- Usa **PostgreSQL gestito** (AWS RDS, GCP Cloud SQL, etc.)
-- Configura **backup automatici**
-- Imposta **connessioni SSL**
-- Usa **connection pooling**
-
-### Variabili Ambiente Produzione
-
-```bash
-DATABASE_URL=postgresql://user:pass@prodhost:5432/dbname
-ALLOWED_ORIGINS=https://tuodominio.com
-```
+- ✅ **OAuth Authentication**: Databricks OAuth per accesso al database
+- ✅ **SQL Injection Prevention**: SQLAlchemy ORM con prepared statements
+- ✅ **Input Validation**: Pydantic schemas
+- ✅ **Session Tracking**: UUID-based sessions
+- ✅ **IP Tracking**: Anti-fraud mechanism
+- ✅ **CORS**: Configurabile per ambienti diversi
 
 ---
 
 ## 📈 Performance
 
-- **Indici database** su tutte le foreign key e campi ricerca
-- **Query ottimizzate** con eager loading
-- **Cache** per risultati frequenti (da implementare)
-- **Compressione** response API
-- **Lazy loading** componenti React
+- ✅ **Database Indexes**: Su tutte le foreign key e campi di ricerca
+- ✅ **Connection Pooling**: Gestito da SQLAlchemy
+- ✅ **Static File Serving**: Efficiente serving da FastAPI
+- ✅ **Scalability**: Auto-scaling di Databricks Apps
+- ✅ **Lakebase**: Managed PostgreSQL con alta disponibilità
+
+---
+
+## 🚧 Roadmap
+
+### v2.2 (Prossimamente)
+
+- [ ] Autenticazione utenti integrata con Databricks
+- [ ] Dashboard amministratore avanzata
+- [ ] Export risultati in Excel/CSV
+- [ ] Notifiche via email
+- [ ] API per integrazioni esterne
+- [ ] Modalità offline per raccolta voti
+
+### v3.0 (Futuro)
+
+- [ ] Multi-lingua (i18n)
+- [ ] Temi personalizzabili
+- [ ] Workflow di approvazione sondaggi
+- [ ] Analytics avanzati
+- [ ] Mobile app (iOS/Android)
+- [ ] Integrazione con Slack/Teams
 
 ---
 
 ## 🤝 Contributi
 
-Progetto sviluppato da **Web Democracy Team** in collaborazione con **Databricks** e **TeamSystem**.
+Progetto sviluppato in collaborazione con **Databricks** e **TeamSystem**.
 
 ---
 
@@ -600,10 +515,17 @@ Progetto interno - Tutti i diritti riservati
 
 ## 📞 Supporto
 
-Per bug, domande o richieste di funzionalità, contattare il team di sviluppo.
+Per domande, problemi o richieste:
+
+1. Consulta il [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+2. Controlla i logs: `databricks apps logs webdemocracy-app`
+3. Contatta il team di sviluppo
+4. Consulta la documentazione Databricks
 
 ---
 
-**Versione:** 2.1  
-**Ultimo aggiornamento:** 26 Ottobre 2025  
-**Stack:** Python + FastAPI + PostgreSQL + React + TypeScript
+**Versione:** 2.1.0  
+**Ultimo aggiornamento:** 8 Novembre 2025  
+**Deployment**: Databricks Apps + Lakebase  
+**Stack:** React + TypeScript + FastAPI + PostgreSQL
+

@@ -11,6 +11,7 @@ export interface Tag {
   id: number;
   name: string;
   color: string;
+  is_active: boolean;
   created_at: string;
 }
 
@@ -178,4 +179,38 @@ export interface SurveyStats {
 export interface TagCreate {
   name: string;
   color?: string;
+}
+
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+  POLLSTER = 'pollster'
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  date_of_birth?: string;
+  profile_photo?: string;
+  user_role: UserRole;
+  gender?: string;
+  address_region?: string;
+  preferred_language: string;
+  registration_date: string;
+  actual_geolocation?: string;
+  last_login_date?: string;
+  last_ip_address?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserUpdate {
+  name?: string;
+  date_of_birth?: string;
+  profile_photo?: string;
+  gender?: string;
+  address_region?: string;
+  preferred_language?: string;
+  actual_geolocation?: string;
 }

@@ -33,7 +33,7 @@ fi
 
 if ! command_exists psql; then
     echo -e "${YELLOW}⚠️  psql non trovato. L'inizializzazione automatica del database non sarà disponibile.${NC}"
-    echo -e "${YELLOW}   Dovrai eseguire manualmente lo script database/init-lakebase.sql${NC}"
+    echo -e "${YELLOW}   Dovrai eseguire manualmente lo script database/init.sql${NC}"
     PSQL_AVAILABLE=false
 else
     PSQL_AVAILABLE=true
@@ -44,8 +44,8 @@ echo -e "${GREEN}✅ Tutti i prerequisiti sono soddisfatti${NC}"
 # Verifica file .env.lakebase
 if [ ! -f ".env.lakebase" ]; then
     echo -e "${RED}❌ File .env.lakebase non trovato!${NC}"
-    echo -e "${YELLOW}Crea il file .env.lakebase copiando .env.lakebase.example:${NC}"
-    echo -e "   cp .env.lakebase.example .env.lakebase"
+    echo -e "${YELLOW}Crea il file .env.lakebase copiando env.lakebase.example:${NC}"
+    echo -e "   cp env.lakebase.example .env.lakebase"
     echo -e "   # Modifica .env.lakebase con le tue credenziali Databricks"
     exit 1
 fi
@@ -68,16 +68,17 @@ fi
 echo -e "${YELLOW}🔄 Attivazione ambiente virtuale...${NC}"
 source venv/bin/activate
 
-# Installa dipendenze Lakebase
-echo -e "${YELLOW}📥 Installazione dipendenze Python (con Databricks)...${NC}"
-pip install -r requirements-lakebase.txt --quiet
+# Installa dipendenze (requirements.txt è ora unificato per local + hybrid)
+echo -e "${YELLOW}📥 Installazione dipendenze Python...${NC}"
+pip install -r requirements.txt --quiet
 
 # Testa connessione a Lakebase
 echo -e "${CYAN}🔍 Test connessione a Databricks Lakebase...${NC}"
+export DEPLOY_MODE=hybrid
 USE_LAKEBASE=true python3 -c "
 import sys
 sys.path.insert(0, '.')
-from database_lakebase import test_connection
+from database import test_connection
 if not test_connection():
     print('❌ Impossibile connettersi a Databricks Lakebase')
     print('Verifica le credenziali nel file .env.lakebase')
@@ -100,13 +101,13 @@ if [ "$PSQL_AVAILABLE" = true ]; then
     export PGPASSWORD="$LAKEBASE_PASSWORD"
     export PGOPTIONS="-c search_path=${LAKEBASE_SCHEMA:-public}"
     
-    # Esegui lo script init-lakebase.sql
-    echo -e "${YELLOW}📝 Esecuzione script init-lakebase.sql su schema: ${LAKEBASE_SCHEMA:-public}${NC}"
+    # Esegui lo script init.sql (compatibile con Lakebase)
+    echo -e "${YELLOW}📝 Esecuzione script init.sql su schema: ${LAKEBASE_SCHEMA:-public}${NC}"
     psql -h "$LAKEBASE_HOST" \
          -p "$LAKEBASE_PORT" \
          -U "$LAKEBASE_USER" \
          -d "$LAKEBASE_DATABASE" \
-         -f ../database/init-lakebase.sql \
+         -f ../database/init.sql \
          -v ON_ERROR_STOP=1 \
          --set=sslmode="$LAKEBASE_SSLMODE" \
          2>&1 | grep -v "NOTICE:" | grep -v "already exists"
@@ -124,21 +125,17 @@ if [ "$PSQL_AVAILABLE" = true ]; then
     fi
 else
     echo -e "${YELLOW}⚠️  Inizializzazione automatica saltata. Esegui manualmente:${NC}"
-    echo -e "   psql -h \$LAKEBASE_HOST -U \$LAKEBASE_USER -d \$LAKEBASE_DATABASE -f database/init-lakebase.sql"
+    echo -e "   psql -h \$LAKEBASE_HOST -U \$LAKEBASE_USER -d \$LAKEBASE_DATABASE -f database/init.sql"
 fi
 
-# Crea link simbolico per usare database_lakebase.py
-if [ -f "database_original.py" ]; then
-    rm -f database_original.py
-fi
-cp database.py database_original.py
-cp database_lakebase.py database.py
+# Database unificato: database.py gestisce automaticamente local e hybrid
+echo -e "${GREEN}✅ Database configurato per Lakebase (hybrid mode)${NC}"
+echo -e "${CYAN}   database.py userà automaticamente Lakebase con USE_LAKEBASE=true${NC}"
 
-echo -e "${GREEN}✅ Database configurato per Lakebase${NC}"
-
-# Avvia backend in background
-echo -e "${BLUE}🚀 Avvio Backend FastAPI...${NC}"
-USE_LAKEBASE=true python main.py &
+# Avvia backend in background con DEPLOY_MODE
+echo -e "${BLUE}🚀 Avvio Backend FastAPI (modalità ibrida)...${NC}"
+export DEPLOY_MODE=hybrid
+USE_LAKEBASE=true python main_local.py &
 BACKEND_PID=$!
 
 # Torna alla directory principale
@@ -182,14 +179,6 @@ echo ""
 # Funzione per cleanup quando si esce
 cleanup() {
     echo -e "\n${YELLOW}🛑 Arresto servizi...${NC}"
-    
-    # Ripristina database.py originale
-    cd backend
-    if [ -f "database_original.py" ]; then
-        mv database_original.py database.py
-        echo -e "${GREEN}✅ Database.py ripristinato${NC}"
-    fi
-    cd ..
     
     # Termina processi
     kill $BACKEND_PID 2>/dev/null

@@ -1,8 +1,22 @@
 -- ============================================================================
 -- Web Democracy - Database Initialization Script
--- Versione: 2.1
--- Data: 26 Ottobre 2025
+-- Versione: 3.0
+-- Data: 9 Novembre 2025
 -- ============================================================================
+-- COMPATIBILITÀ: PostgreSQL locale e Databricks Lakebase
+-- Lakebase è PostgreSQL-compatibile (porta 5432), usa la stessa sintassi SQL
+-- NON confondere con SQL Warehouse (porta 443) che ha sintassi diversa
+-- ============================================================================
+-- IMPORTANTE: Tutte le tabelle vengono create nello schema 'webdemocracy'
+-- Lo schema 'public' NON viene utilizzato
+-- ============================================================================
+
+-- Create schema for Lakebase deployments (ignored if not needed for local)
+-- This ensures the webdemocracy schema exists before creating tables
+CREATE SCHEMA IF NOT EXISTS webdemocracy;
+
+-- Set search_path to use webdemocracy schema for all subsequent operations
+SET search_path TO webdemocracy;
 
 -- Drop tables if exist (in reverse order for foreign keys)
 DROP TABLE IF EXISTS survey_likes CASCADE;
@@ -12,6 +26,7 @@ DROP TABLE IF EXISTS survey_tags CASCADE;
 DROP TABLE IF EXISTS survey_options CASCADE;
 DROP TABLE IF EXISTS surveys CASCADE;
 DROP TABLE IF EXISTS tags CASCADE;
+DROP TABLE IF EXISTS "user" CASCADE;
 DROP TABLE IF EXISTS settings CASCADE;
 DROP TYPE IF EXISTS questiontype CASCADE;
 
@@ -19,7 +34,7 @@ DROP TYPE IF EXISTS questiontype CASCADE;
 -- ENUM TYPES
 -- ============================================================================
 
--- Enum per i tipi di domanda
+-- Enum per i tipi di domanda (creato nello schema webdemocracy grazie a search_path)
 CREATE TYPE questiontype AS ENUM (
     'single_choice',     -- Risposta singola (radio)
     'multiple_choice',   -- Risposte multiple (checkbox)
@@ -38,6 +53,7 @@ CREATE TABLE tags (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) UNIQUE NOT NULL,
     color VARCHAR(7) DEFAULT '#6366f1',  -- Colore esadecimale
+    is_active BOOLEAN DEFAULT TRUE NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -156,6 +172,28 @@ CREATE TABLE settings (
 
 CREATE INDEX idx_settings_key ON settings(key);
 
+-- Tabella User (creata nello schema webdemocracy)
+CREATE TABLE "user" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    date_of_birth DATE,
+    profile_photo TEXT,  -- URL o base64 dell'immagine
+    user_role VARCHAR(50) DEFAULT 'user' CHECK (user_role IN ('user', 'admin', 'pollster')),
+    gender VARCHAR(50),
+    address_region VARCHAR(255),
+    preferred_language VARCHAR(10) DEFAULT 'it',
+    registration_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    actual_geolocation VARCHAR(255),  -- Coordinate GPS o località
+    last_login_date TIMESTAMP WITH TIME ZONE,
+    last_ip_address VARCHAR(45),  -- Supporta IPv4 e IPv6
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_user_email ON "user"(email);
+CREATE INDEX idx_user_role ON "user"(user_role);
+
 -- ============================================================================
 -- INITIAL DATA
 -- ============================================================================
@@ -174,6 +212,12 @@ INSERT INTO tags (name, color) VALUES
 -- Impostazione URL per QR Code (default)
 INSERT INTO settings (key, value) VALUES 
     ('qr_code_url', 'http://localhost:3000');
+
+-- Utenti di esempio
+INSERT INTO "user" (name, email, user_role, preferred_language, gender, address_region) VALUES 
+    ('Demo User', 'demo@local.dev', 'admin', 'it', 'Preferisco non specificare', 'Italia'),
+    ('Alessandro Gandini', 'alessandro.gandini@databricks.com', 'admin', 'it', 'Preferisco non specificare', 'Italia'),
+    ('Pollster User', 'pollster@webdemocracy.com', 'pollster', 'it', 'Preferisco non specificare', 'Italia');
 
 -- Sondaggio di esempio 1: Scelta Singola
 INSERT INTO surveys (
@@ -363,7 +407,10 @@ BEGIN
     RAISE NOTICE 'Tables created: 8';
     RAISE NOTICE 'Sample surveys: 6';
     RAISE NOTICE 'Tags: 8';
-    RAISE NOTICE 'Version: 2.1';
+    RAISE NOTICE 'Version: 2.3';
+    RAISE NOTICE 'Schema: webdemocracy (ALWAYS)';
+    RAISE NOTICE 'Compatible: PostgreSQL & Databricks Lakebase';
     RAISE NOTICE '========================================';
     RAISE NOTICE '';
 END $$;
+

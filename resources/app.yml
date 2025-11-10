@@ -1,0 +1,15 @@
+resources:
+  apps:
+    webdemocracy_app:
+      name: "webdemocracy-app"
+      source_code_path: ../backend
+      description: "Web Democracy - Democratic Decision Platform on Databricks"
+      
+      resources:
+        - name: "webdemocracy-db"
+          description: "PostgreSQL database for Web Democracy on Lakebase"
+          database:
+            database_name: ${resources.database_catalogs.webdemocracy_catalog.database_name}
+            instance_name: ${resources.database_catalogs.webdemocracy_catalog.database_instance_name}
+            permission: "CAN_CONNECT_AND_CREATE"
+

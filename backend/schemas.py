@@ -11,8 +11,14 @@ class TagBase(BaseModel):
 class TagCreate(TagBase):
     pass
 
+class TagUpdate(BaseModel):
+    name: Optional[str] = Field(None, min_length=1, max_length=50)
+    color: Optional[str] = None
+    is_active: Optional[bool] = None
+
 class Tag(TagBase):
     id: int
+    is_active: bool = True
     created_at: datetime
     
     class Config:
@@ -241,6 +247,38 @@ class Settings(BaseModel):
     id: int
     key: str
     value: str
+    updated_at: datetime
+    
+    class Config:
+        from_attributes = True
+
+# ===== SCHEMI PER GLI UTENTI =====
+class UserBase(BaseModel):
+    name: str
+    email: str
+    preferred_language: str = "it"
+
+class UserUpdate(BaseModel):
+    name: Optional[str] = None
+    date_of_birth: Optional[datetime] = None
+    profile_photo: Optional[str] = None
+    gender: Optional[str] = None
+    address_region: Optional[str] = None
+    preferred_language: Optional[str] = None
+    actual_geolocation: Optional[str] = None
+
+class User(UserBase):
+    id: int
+    date_of_birth: Optional[datetime] = None
+    profile_photo: Optional[str] = None
+    user_role: str
+    gender: Optional[str] = None
+    address_region: Optional[str] = None
+    registration_date: datetime
+    actual_geolocation: Optional[str] = None
+    last_login_date: Optional[datetime] = None
+    last_ip_address: Optional[str] = None
+    created_at: datetime
     updated_at: datetime
     
     class Config:

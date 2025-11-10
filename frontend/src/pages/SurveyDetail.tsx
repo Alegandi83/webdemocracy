@@ -1407,7 +1407,11 @@ const SurveyDetail: React.FC = () => {
   );
 
   return (
-    <SidebarLayout sidebar={sidebar} sidebarPosition="right">
+    <SidebarLayout 
+      sidebar={sidebar} 
+      sidebarPosition="right"
+      mobileToggleLabel="Esprimi Gradimento"
+    >
       {mainContent}
     </SidebarLayout>
   );

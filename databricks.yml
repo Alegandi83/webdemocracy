@@ -1,0 +1,14 @@
+# Databricks asset bundle definition for Web Democracy
+bundle:
+  name: webdemocracy_dab
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-1694638390951332.12.azuredatabricks.net
+

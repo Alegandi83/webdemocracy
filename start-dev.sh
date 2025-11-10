@@ -76,9 +76,10 @@ source venv/bin/activate
 echo -e "${YELLOW}📥 Installazione dipendenze Python...${NC}"
 pip install -r requirements.txt
 
-# Avvia backend in background
-echo -e "${BLUE}🚀 Avvio Backend FastAPI...${NC}"
-python main.py &
+# Avvia backend in background con DEPLOY_MODE
+echo -e "${BLUE}🚀 Avvio Backend FastAPI (modalità locale)...${NC}"
+export DEPLOY_MODE=local
+python main_local.py &
 BACKEND_PID=$!
 
 # Torna alla directory principale
@@ -130,3 +131,4 @@ trap cleanup EXIT
 
 # Mantieni lo script in esecuzione
 wait
+

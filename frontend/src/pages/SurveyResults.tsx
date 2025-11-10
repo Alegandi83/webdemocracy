@@ -1077,7 +1077,11 @@ const SurveyResults: React.FC = () => {
   );
 
   return (
-    <SidebarLayout sidebar={sidebar} sidebarPosition="right">
+    <SidebarLayout 
+      sidebar={sidebar} 
+      sidebarPosition="right"
+      mobileToggleLabel="Visualizza Commenti"
+    >
       {mainContent}
     </SidebarLayout>
   );

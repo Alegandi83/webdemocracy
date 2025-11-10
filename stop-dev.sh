@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 
 # Ferma processi Python (FastAPI)
 echo -e "${YELLOW}🐍 Arresto Backend FastAPI...${NC}"
-pkill -f "python main.py" 2>/dev/null
+pkill -f "python main_local.py" 2>/dev/null
 pkill -f "uvicorn" 2>/dev/null
 
 # Ferma processi Node.js (React)
@@ -29,3 +29,4 @@ docker-compose down
 echo -e "${GREEN}✅ Web Democracy arrestata completamente${NC}"
 echo ""
 echo -e "${BLUE}📋 Per riavviare l'app esegui: ${YELLOW}./start-dev.sh${NC}"
+

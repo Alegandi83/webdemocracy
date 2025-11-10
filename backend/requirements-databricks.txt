@@ -1,0 +1,30 @@
+# ============================================================================
+# Web Democracy - Databricks Full Deploy Requirements
+# ============================================================================
+# Da usare SOLO per deploy Full Databricks (modalità app.py con OAuth)
+#
+# Include:
+# - Tutte le dipendenze base da requirements.txt
+# - databricks-sdk per autenticazione OAuth
+# ============================================================================
+
+# Include dipendenze base
+-r requirements.txt
+
+# Databricks SDK per autenticazione OAuth e gestione workspace
+# Necessario SOLO per lakebase_connector.py (Full Databricks mode)
+databricks-sdk>=0.73.0
+
+# ============================================================================
+# Uso:
+# 
+# Local mode:
+#   pip install -r requirements.txt
+#
+# Hybrid mode (Lakebase da locale):
+#   pip install -r requirements.txt
+#
+# Full Databricks mode:
+#   pip install -r requirements-databricks.txt
+# ============================================================================
+
