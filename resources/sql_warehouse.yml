@@ -1,0 +1,15 @@
+resources:
+  sql_warehouses:
+    webdemocracy_sql_warehouse:
+      name: webdemocracy-sql-warehouse
+      cluster_size: "2X-Small"
+      enable_serverless_compute: true
+      auto_stop_mins: 10
+      max_num_clusters: 1
+      tags:
+        custom_tags:
+          - key: "Project"
+            value: "WebDemocracy"
+          - key: "Purpose"
+            value: "H3GeospatialQueries"
+

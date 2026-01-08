@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: survey_db
+      POSTGRES_USER: survey_user
+      POSTGRES_PASSWORD: survey_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+
